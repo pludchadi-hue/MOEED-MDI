@@ -1,0 +1,21 @@
+{
+  "name": "MOEED-MD",
+  "description": "MOEED-MD WhatsApp bot made by MoeedMD official",
+  "logo": "https://www.image2url.com/r2/default/images/1778157251639-74e2db0d-9952-4109-a6f7-f4e819329a9c.jpeg",
+  "keywords": ["bot","MOEED-MD","MOEED-MD"],
+  "success_url": "/",
+
+  "env": {
+    "SESSION_ID": {
+        "description": "Put the MOEED-MD session-id here.",
+        "required": true
+    }
+},
+
+"buildpacks": [
+    {
+        "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+],
+"stack": "heroku-24"
+}
