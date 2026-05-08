@@ -73,8 +73,8 @@ if (!fs.existsSync(CREDS)) {
   }
   
   let session = config.SESSION_ID.trim();
-  if (!session.includes("KIRA-MD~")) {
-    console.log("❌ Invalid KIRA-MD session format");
+  if (!session.includes("MOEED-MD~")) {
+    console.log("❌ Invalid MOEED-MD session format");
     process.exit(1);
   }
   
