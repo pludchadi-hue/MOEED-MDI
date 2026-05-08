@@ -73,8 +73,8 @@ if (!fs.existsSync(CREDS)) {
   }
   
   let session = config.SESSION_ID.trim();
-  if (!session.includes("MOEED-MD~")) {
-    console.log("❌ Invalid MOEED-MD session format");
+  if (!session.includes("KIRA-MD~")) {
+    console.log("❌ Invalid KIRA-MD session format");
     process.exit(1);
   }
   
@@ -161,7 +161,7 @@ async function getProfilePicture(sock, jid) {
     const ppUrl = await sock.profilePictureUrl(jid, 'image');
     return ppUrl;
   } catch {
-    return 'https://www.image2url.com/r2/default/images/1778157251639-74e2db0d-9952-4109-a6f7-f4e819329a9c.jpeg'; // Default image
+    return 'https://imgur.com/a/mkRDArV'; // Default image
   }
 }
 
@@ -242,10 +242,10 @@ async function connectToWA() {
       console.log(`✅ Plugins loaded: ${loadedCount}/${pluginFiles.length}`);
       
       // Send connection message with image
-      const aliveMsg = `*╭──────────────●●►*\n> *MOEED-MD CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*╭⊱✫ KIRA MD ✫⊱╮*\n*│✫📂 Bot Name: ${botConfig.BOT_NAME}*\n*│✫🛡️ Owner: ${config.OWNER_NAME}*\n*│✫♻️ Prefix: ${prefix}*\n*│✫🌍 Mode: ${config.MODE}*\n*│✫⏰ Uptime: ${runtime(process.uptime())}*\n*╰──────────────●●►*\n\n> Enjoy Using KIRA MD`;
+      const aliveMsg = `*╭──────────────●●►*\n> *MOEED-MD CONNECTED SUCCESSFULLY*\n\n> *Type ${prefix}menu to view commands*  \n\n*╭⊱✫ MOEED MD ✫⊱╮*\n*│✫📂 Bot Name: ${botConfig.BOT_NAME}*\n*│✫🛡️ Owner: ${config.OWNER_NAME}*\n*│✫♻️ Prefix: ${prefix}*\n*│✫🌍 Mode: ${config.MODE}*\n*│✫⏰ Uptime: ${runtime(process.uptime())}*\n*╰──────────────●●►*\n\n> Enjoy Using MOEED MD`;
       
       // Image URL for connection message
-      const imageUrl = 'https://www.image2url.com/r2/default/images/1778157251639-74e2db0d-9952-4109-a6f7-f4e819329a9c.jpeg';
+      const imageUrl = 'https://imgur.com/a/mkRDArV';
       
       try {
         // Send to owner with image
@@ -254,7 +254,7 @@ async function connectToWA() {
           caption: aliveMsg
         }).catch(() => {
           // Fallback to text if image fails
-          sock.sendMessage(ownerNumber[0] + '923094676374@s.whatsapp.net', { text: aliveMsg });
+          sock.sendMessage(ownerNumber[0] + '@s.whatsapp.net', { text: aliveMsg });
         });
         
         // Send to bot's own number
@@ -274,7 +274,7 @@ async function connectToWA() {
   });
 
   // Anti-call feature
-  const callMsg = `⚠️ *ANTI-CALL IS ACTIVE* ⚠️\n\nDear User,\n\nYou have attempted to call the bot. To ensure uninterrupted service, please refrain from calling.\n\nThank you for your understanding.\n\n${botConfig.COPYRIGHT || 'KIRA-MD'}`;
+  const callMsg = `⚠️ *ANTI-CALL IS ACTIVE* ⚠️\n\nDear User,\n\nYou have attempted to call the bot. To ensure uninterrupted service, please refrain from calling.\n\nThank you for your understanding.\n\n${botConfig.COPYRIGHT || 'MOEED-MD'}`;
   
   sock.ev.on('call', async (calls) => {
     if (config.ANTI_CALL === 'true') {
@@ -361,7 +361,7 @@ async function connectToWA() {
           if (settings.goodbye) {
             try {
               // Get user's profile picture
-              const ppUrl = await getProfilePicture(sock, participant).catch(() => 'https://www.image2url.com/r2/default/images/1778157251639-74e2db0d-9952-4109-a6f7-f4e819329a9c.jpeg');
+              const ppUrl = await getProfilePicture(sock, participant).catch(() => 'https://n.uguu.se/BlGoHUJU.jpg');
               
               // Format goodbye message with variables
               let goodbyeText = settings.goodbyeMsg || DEFAULT_GOODBYE;
