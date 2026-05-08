@@ -78,7 +78,7 @@ if (!fs.existsSync(CREDS)) {
     process.exit(1);
   }
   
-  const decoded = Buffer.from(session.substring(7), 'base64').toString('utf8');
+ const decoded = Buffer.from(session.substring(9), 'base64').toString('utf8');
   JSON.parse(decoded);
   
   fs.mkdirSync(AUTH_DIR, { recursive: true });
@@ -172,7 +172,9 @@ async function connectToWA() {
   const prefix = config.PREFIX || '.';
   console.log(`🤖 MOEED-MD Connecting with prefix: "${prefix}"`);
   
-  const { state: authState, saveCreds: saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/');
+  const { state: authState, saveCreds } = await useMultiFileAuthState(
+  path.join(__dirname, 'auth_info_baileys')
+);
   
   // Load required modules from lib
   let functions, sms, botConfig;
@@ -205,7 +207,7 @@ async function connectToWA() {
     const { connection, lastDisconnect } = update;
     
     if (connection === 'close') {
-      const statusCode = lastDisconnect.error?.output?.statusCode;
+      const statusCode = lastDisconnect?.error?.output?.statusCode;
       
       if (statusCode === DisconnectReason.loggedOut) {
         console.log("❌ Device Logged Out, please delete auth_info_baileys and rescan.");
@@ -786,7 +788,7 @@ Commands:
       
       // ============ ANTI LINK ============
       if (config.ANTI_LINK === 'true' && isGroup && !isAdmins && !isOwner && !msg.key.fromMe && groupSetting.antilink !== false) {
-        const linkRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)|(chat\.whatsapp\.com\/[^\s]+)|(wa\.me\/[^\s]+)/gi;
+       const linkRegex = /(?:https?:\/\/|www\.|chat\.whatsapp\.com\/|wa\.me\/)\S+/gi;
         if (linkRegex.test(body)) {
           await sock.sendMessage(from, { delete: msg.key }).catch(() => {});
           reply('⚠️ *Links are not allowed in this group!*');
