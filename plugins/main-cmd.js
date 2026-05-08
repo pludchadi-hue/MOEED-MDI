@@ -315,7 +315,7 @@ async (conn, mek, m, { from, pushname, reply, contextInfo }) => {
     try {
         let desc = `
 🤩 *HELLOW* *${pushname}*
-> WELLCOME TO KIRA-MD 🪀
+> WELLCOME TO MOEED-MD 🪀
 
 ╭─「 ꜱᴛᴀᴛᴜꜱ ᴅᴇᴛᴀɪʟꜱ 」
 │👤 *\`User\`*: ${pushname}
